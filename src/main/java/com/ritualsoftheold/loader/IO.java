@@ -5,7 +5,6 @@ import com.jme3.asset.plugins.FileLocator;
 import com.jme3.scene.Spatial;
 import com.jme3.scene.plugins.gltf.GltfModelKey;
 import com.jme3.texture.Texture;
-import com.jme3.texture.Texture2D;
 
 import java.io.File;
 import java.util.Objects;
