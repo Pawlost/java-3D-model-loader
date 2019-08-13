@@ -17,6 +17,7 @@ dependencies {
     compile 'org.jmonkeyengine:jme3-core:3.2.2-stable'
     compile group: 'org.jmonkeyengine', name: 'jme3-plugins', version: '3.2.2-stable'
     compile 'org.slf4j:slf4j-api:1.7.26'
+    compile group: 'org.apache.commons', name: 'commons-collections4', version: '4.3'
     implementation "javax.xml.bind:jaxb-api:2.2.11"
     implementation "com.sun.xml.bind:jaxb-core:2.2.11"
     implementation "com.sun.xml.bind:jaxb-impl:2.2.11"
