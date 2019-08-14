@@ -6,9 +6,6 @@ import com.jme3.scene.Spatial;
 import com.jme3.scene.plugins.gltf.GltfModelKey;
 import com.jme3.texture.Texture;
 
-import java.awt.*;
-import java.io.File;
-import java.util.Objects;
 
 public class IO {
     public AssetManager assetManager;
@@ -17,15 +14,13 @@ public class IO {
     }
 
     public Spatial loadAsset(String asset) {
-        File file = new File(Objects.requireNonNull(ClassLoader.getSystemClassLoader().getResource("models/"+asset)).getFile());
-        assetManager.registerLocator(file.getParent(), FileLocator.class);
+        assetManager.registerLocator("3D-model-loader/src/main/resources/models", FileLocator.class);
         GltfModelKey key = new GltfModelKey(asset);
         return assetManager.loadModel(key);
     }
 
     public Texture loadTexture(String texture){
-        File file = new File(Objects.requireNonNull(ClassLoader.getSystemClassLoader().getResource("textures/"+texture)).getFile());
-        assetManager.registerLocator(file.getParent(), FileLocator.class);
+        assetManager.registerLocator("3D-model-loader/src/main/resources/textures", FileLocator.class);
         return assetManager.loadTexture(texture);
     }
 }
