@@ -1,16 +1,22 @@
 package com.ritualsoftheold.loader;
 
 import com.jme3.math.FastMath;
-import com.jme3.math.Vector3f;
 import com.jme3.scene.*;
 import com.jme3.util.TempVars;
+import org.apache.commons.collections4.map.MultiKeyMap;
 
 import java.nio.FloatBuffer;
-import java.util.Arrays;
 
 public class BlockMaker {
-    public static byte[][][] getBlocks(Spatial spatial) {
+    private float defaultDistanceX;
+    private float defaultDistanceY;
+    private float defaultDistanceZ;
 
+    private MultiKeyMap<Integer, byte[][][]> blocks;
+
+    public BlockMaker(Spatial spatial){
+
+        blocks = new MultiKeyMap<>();
         while (spatial instanceof Node) {
             spatial = ((Node) spatial).getChild(0);
         }
@@ -77,13 +83,59 @@ public class BlockMaker {
                 maxZ = Math.round(maxZ / 0.25f);
                 minZ = Math.round(minZ / 0.25f);
 
-                float distanceZ = Math.max(Math.abs(maxZ + minZ), 1);
-                float distanceY = Math.max(Math.abs(maxY + minY), 1);
-                float distanceX = Math.max(Math.abs(maxX + minX), 1);
+                defaultDistanceX = Math.abs(maxZ + minZ);
+                defaultDistanceY = Math.abs(maxY + minY);
+                defaultDistanceZ = Math.abs(maxX + minX);
 
-                return new byte[(int) (distanceZ)][(int) (distanceY)][(int) (distanceX)];
+                float distanceX = defaultDistanceX;
+                float distanceY = defaultDistanceY;
+                float distanceZ = defaultDistanceZ;
+
+                int posX = 0;
+                int posY = 0;
+                int posZ = 0;
+
+                do{
+                    int sizeX = (int)Math.max(Math.min(distanceX, 64), 1);
+                    int sizeY = (int)Math.max(Math.min(distanceX, 64), 1);
+                    int sizeZ = (int)Math.max(Math.min(distanceX, 64), 1);
+
+                    distanceX -= sizeX;
+                    distanceY -= sizeY;
+                    distanceZ -= sizeZ;
+
+                    blocks.put(posX, posY, posZ, new byte[sizeZ][sizeY][sizeX]);
+
+                    if(distanceX > 64){
+                        posX ++;
+                    }
+
+                    if(distanceY > 64){
+                        posX ++;
+                    }
+
+                    if(distanceZ > 64){
+                        posX ++;
+                    }
+
+                } while (distanceX > 64 || distanceY > 64 || distanceZ > 64);
             }
         }
-        return null;
+    }
+
+    public MultiKeyMap<Integer, byte[][][]> getBlocks() {
+        return blocks;
+    }
+
+    public float getDefaultDistanceX() {
+        return defaultDistanceX;
+    }
+
+    public float getDefaultDistanceY() {
+        return defaultDistanceY;
+    }
+
+    public float getDefaultDistanceZ() {
+        return defaultDistanceZ;
     }
 }

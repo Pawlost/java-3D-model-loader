@@ -14,13 +14,13 @@ public class IO {
     }
 
     public Spatial loadAsset(String asset) {
-        assetManager.registerLocator("3D-model-loader/src/main/resources/models", FileLocator.class);
+        assetManager.registerLocator("3D-model-loader/src/main/resources/models/", FileLocator.class);
         GltfModelKey key = new GltfModelKey(asset);
         return assetManager.loadModel(key);
     }
 
     public Texture loadTexture(String texture){
-        assetManager.registerLocator("3D-model-loader/src/main/resources/textures", FileLocator.class);
+        assetManager.registerLocator("3D-model-loader/src/main/resources/textures/", FileLocator.class);
         return assetManager.loadTexture(texture);
     }
 }
