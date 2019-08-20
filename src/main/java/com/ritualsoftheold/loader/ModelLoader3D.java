@@ -1,17 +1,16 @@
 package com.ritualsoftheold.loader;
 
 import com.jme3.asset.AssetManager;
-import com.jme3.material.Material;
 import com.jme3.scene.Spatial;
 import com.jme3.texture.Texture;
 
 public class ModelLoader3D {
 
     private static final String MODEL_FORMAT = ".gltf";
-    private IO input;
+    private AssetIO input;
 
     public ModelLoader3D(AssetManager assetManager){
-        input = new IO(assetManager);
+        input = new AssetIO(assetManager);
     }
 
     public Spatial getMesh(String assetName){
