@@ -4,7 +4,7 @@
 ##Asset to include
 Tall_Grass-mesh_variant01-01.gltf
 
-Tall_grass-texture-2.png
+Tall_grass-texture-02.png
 
 birch-02_baked.gltf
 
