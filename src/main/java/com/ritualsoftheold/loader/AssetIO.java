@@ -10,6 +10,7 @@ import com.jme3.texture.Texture;
 
 import java.awt.*;
 import java.awt.image.*;
+import java.io.File;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 
@@ -22,13 +23,23 @@ public class AssetIO {
     }
 
     Spatial loadAsset(String asset) {
-        assetManager.registerLocator("3D-model-loader/src/main/resources/models/", FileLocator.class);
+        File file = new File("3D-model-loader/src/main/resources/models/");
+        if(file.exists()){
+            assetManager.registerLocator(file.getPath(), FileLocator.class);
+        }else {
+            assetManager.registerLocator("models/", FileLocator.class);
+        }
         GltfModelKey key = new GltfModelKey(asset);
         return assetManager.loadModel(key);
     }
 
     Texture loadTexture(String texture) {
-        assetManager.registerLocator("3D-model-loader/src/main/resources/textures/", FileLocator.class);
+        File file = new File("3D-model-loader/src/main/resources/textures/");
+        if (file.exists()) {
+            assetManager.registerLocator(file.getPath(), FileLocator.class);
+        }else{
+            assetManager.registerLocator("textures/", FileLocator.class);
+        }
         TextureKey tk = new TextureKey(texture, false);
         return assetManager.loadTexture(tk);
     }
