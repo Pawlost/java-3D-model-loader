@@ -19,6 +19,10 @@ public class ModelLoader3D {
         return asset;
     }
 
+    public void register(){
+        input.register();
+    }
+
     public Texture getTexture(String assetName){
         return input.loadTexture(assetName);
     }

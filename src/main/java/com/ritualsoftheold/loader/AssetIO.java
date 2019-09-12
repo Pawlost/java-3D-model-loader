@@ -17,31 +17,33 @@ import java.nio.ByteOrder;
 
 public class AssetIO {
     private AssetManager assetManager;
+    private boolean isRegistred = false;
 
     AssetIO(AssetManager assetManager) {
         this.assetManager = assetManager;
     }
 
     Spatial loadAsset(String asset) {
-        File file = new File("3D-model-loader/src/main/resources/models/");
-        if(file.exists()){
-            assetManager.registerLocator(file.getPath(), FileLocator.class);
-        }else {
-            assetManager.registerLocator("models/", FileLocator.class);
+        if(!isRegistred) {
+            register();
         }
         GltfModelKey key = new GltfModelKey(asset);
         return assetManager.loadModel(key);
     }
 
     Texture loadTexture(String texture) {
-        File file = new File("3D-model-loader/src/main/resources/textures/");
-        if (file.exists()) {
-            assetManager.registerLocator(file.getPath(), FileLocator.class);
-        }else{
-            assetManager.registerLocator("textures/", FileLocator.class);
+        if(!isRegistred) {
+            register();
         }
         TextureKey tk = new TextureKey(texture, false);
         return assetManager.loadTexture(tk);
+    }
+
+    public void register(){
+        assetManager.registerLocator("textures/", FileLocator.class);
+        assetManager.registerLocator("models/", FileLocator.class);
+
+        isRegistred = true;
     }
 
     public static ByteBuffer resizeImage(ByteBuffer jmeImage, int width, int height, int prevWidth, int prevHeight) {
