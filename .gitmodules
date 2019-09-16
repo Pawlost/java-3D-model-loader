@@ -1,0 +1,3 @@
+[submodule "TerraCore"]
+	path = TerraCore
+	url = git@github.com:starandserpent/TerraCore.git

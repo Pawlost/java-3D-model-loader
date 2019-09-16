@@ -1,2 +1,5 @@
+apply from: 'TerraCore/settings.gradle'
+
 rootProject.name = 'ModelLoader3D'
 
+include ':TerraCore'
