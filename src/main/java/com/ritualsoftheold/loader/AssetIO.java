@@ -67,7 +67,6 @@ public class AssetIO {
             }
         }
 
-
         Image newImage = image.getScaledInstance(width, height, Image.SCALE_DEFAULT);
 
         Graphics2D graphics2D = bufferedImage.createGraphics();
